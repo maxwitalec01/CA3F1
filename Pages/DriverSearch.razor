@@ -1,0 +1,102 @@
+﻿@using CA3F1.Shared.Models﻿
+@using Newtonsoft.Json
+<!-- Pages/F1DriverSearch.razor -->
+@page "/DriverSearch"
+
+<h3>F1 Driver Search</h3>
+
+<div>
+    <label for="searchInput">Enter Driver Name:</label>
+    <input id="searchInput" @bind="searchParameter" />
+    <button @onclick="Search">Search</button>
+</div>
+
+
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (driver_data != null && driver_data.response != null && driver_data.response.Any())
+{
+    <br />
+    <br />
+
+    @foreach (var driver in driver_data.response)
+    {
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col">
+                </div>
+                <div id="DriverDetails" class="col align-content-center">
+                    <center>
+                        <h3>@driver.name</h3>
+                        <p>Nationality: @driver.nationality</p>
+                        <p>Birthdate: @driver.birthdate</p>
+                        <img src="@driver.image">
+                        <!-- Add other properties as needed -->
+                    </center>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+    }
+
+
+
+
+}
+else if (error != null)
+{
+    <p style="color: red;">Error: @error</p>
+}
+
+@code {
+    private string searchParameter = "Lewis";
+    private DriverDetailRoot driver_data;
+    private string searchResult;
+    private string error;
+    private bool isLoading;
+
+    private async Task Search()
+    {
+        isLoading = true;
+
+        try
+        {
+            using (var client = new HttpClient())
+            {
+                var request = new HttpRequestMessage
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = new Uri($"https://api-formula-1.p.rapidapi.com/drivers?search={searchParameter}"),
+                        Headers =
+                {
+                        { "X-RapidAPI-Key", "5f3853b99amsh601f7aab225fb6ep1a2569jsndd2d15834371" },
+                        { "X-RapidAPI-Host", "api-formula-1.p.rapidapi.com" },
+                    },
+                    };
+
+                using (var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var responseBody = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(responseBody);
+                    driver_data = JsonConvert.DeserializeObject<DriverDetailRoot>(responseBody);
+                    StateHasChanged(); // Trigger a re-render of the component
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+}

@@ -30,6 +30,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/CA3F1/Pages/DriverSearch.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRHJpdmVyU2VhcmNoLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/CA3F1/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

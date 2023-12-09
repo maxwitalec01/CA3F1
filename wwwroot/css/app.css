@@ -1,5 +1,11 @@
+@font-face {
+    font-family: "F1Font";
+    src: url('./fonts/Formula1-Regular.ttf')
+}
+
+
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'F1Font', Helvetica, Arial, sans-serif;
 }
 
 h1:focus {
