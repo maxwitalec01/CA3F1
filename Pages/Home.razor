@@ -1,13 +1,58 @@
-﻿@page "/"
+﻿@using CA3F1.Shared.Models﻿
+@using Newtonsoft.Json
+@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+<p>API Response:</p>
 
-POGGERS
+@if (TeamData?.response != null)
+{
+	@foreach (var TeamInfo in TeamData.response)
+	{
+		<p>Test: @TeamInfo.position</p>
+		<img src="@TeamInfo.team.logo">
+	}
+}
+else
+{
+	<p>Loading team data...</p>
+}
 
-BOX BOX
+@code {
+	private TeamRankingRoot TeamData;
 
-KEEP FIGHTING MICHEAL
+	protected override async Task OnInitializedAsync()
+	{
+		await MakeApiCall();
+	}
+
+	private async Task MakeApiCall()
+	{
+		using var client = new HttpClient();
+		var request = new HttpRequestMessage
+			{
+				Method = HttpMethod.Get,
+				RequestUri = new Uri("https://api-formula-1.p.rapidapi.com/rankings/teams?season=2023"),
+				Headers =
+	{
+		{ "X-RapidAPI-Key", "5f3853b99amsh601f7aab225fb6ep1a2569jsndd2d15834371" },
+		{ "X-RapidAPI-Host", "api-formula-1.p.rapidapi.com" },
+	},
+			};
+		using (var response = await client.SendAsync(request))
+		{
+			response.EnsureSuccessStatusCode();
+			var body = await response.Content.ReadAsStringAsync();
+			Console.WriteLine(body);
+			TeamData = JsonConvert.DeserializeObject<TeamRankingRoot>(body);
+			StateHasChanged(); // Trigger a re-render of the component
+
+		}
+
+	}
+}
+
