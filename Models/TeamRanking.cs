@@ -35,3 +35,4 @@ public class TeamRankingTeam
     public string name { get; set; }
     public string logo { get; set; }
 }
+

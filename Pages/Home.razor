@@ -9,6 +9,12 @@
 Welcome to your new app.
 <p>API Response:</p>
 
+<script>
+	$(function () {
+		$('[data-toggle="popover"]').popover()
+	})
+</script>
+
 @if (TeamData?.response != null)
 {
 	@foreach (var TeamInfo in TeamData.response)

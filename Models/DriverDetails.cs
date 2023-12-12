@@ -57,10 +57,9 @@ public class DriverDetailRoot
 
 public class DriverDetailTeam
 {
-    public int? season { get; set; }
-    public DriverDetailTeam? team { get; set; }
+    public int season { get; set; }
+    public TeamInfo team { get; set; }
 }
-
 public class DriverDetailTeam2
 {
     public int? id { get; set; }
@@ -73,3 +72,19 @@ public class DriverDetailErrors
     public List<Error>? ErrorsList { get; set; } // Change here
 }
 
+public class InnerTeam
+{
+    public int id { get; set; }
+    public string name { get; set; }
+    public string logo { get; set; }
+}
+
+
+
+
+public class TeamInfo
+{
+    public int id { get; set; }
+    public string name { get; set; }
+    public string logo { get; set; }
+}

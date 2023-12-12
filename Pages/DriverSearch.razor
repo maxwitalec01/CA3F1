@@ -3,15 +3,59 @@
 <!-- Pages/F1DriverSearch.razor -->
 @page "/DriverSearch"
 
-<h3>F1 Driver Search</h3>
+<style>
+    /* Additional styles to ensure the image and content are aligned properly */
+    .card-horizontal {
+        display: flex;
+        flex: 1 1 auto;
+    }
+</style>
 
-<div>
-    <label for="searchInput">Enter Driver Name:</label>
-    <input id="searchInput" @bind="searchParameter" />
-    <button @onclick="Search">Search</button>
+<h3>F1 Driver Search</h3>
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-6 d-flex flex-column align-items-center justify-content-center">
+            <label for="driverSearch">Enter Driver Name:</label>
+            <input type="text" class="form-control" id="driverSearch" placeholder="Lewis" @bind="searchParameter" />
+            <br />
+            <button @onclick="Search" class="btn btn-danger">Search</button>
+        </div>
+        <div class="col-sm-3">
+        </div>
+    </div>
 </div>
 
 
+<div class="container my-5">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="your-image-path.jpg" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Customizable Bootstrap Card</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">By Ivan Vinski</small></p>
+                </div>
+                <div class="card-footer bg-transparent border-top-0">
+                    <i class="fas fa-comment"> </i> <!-- Replace with actual icon -->
+                    <i class="fas fa-heart"> </i> <!-- Replace with actual icon -->
+                    <i class="fas fa-share-square"> </i> <!-- Replace with actual icon -->
+                </div>
+
+            </div>
+
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Cras justo odio</li>
+        </ul>
+    </div>
+</div>
 
 @if (isLoading)
 {
@@ -24,30 +68,100 @@ else if (driver_data != null && driver_data.response != null && driver_data.resp
 
     @foreach (var driver in driver_data.response)
     {
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col">
+        var mostRecentTeam = driver.teams.OrderByDescending(t => t.season).FirstOrDefault();
+
+        <br />
+        <br />
+        <div class="container my-5">
+            <div class="card mb-3" style="width: 100%;">
+                <div class="row g-0">
+                    <div class="col-md-4" style="width: fit-content">
+                        <img src="@driver.image" class="img-fluid rounded-start" alt="..." height="200px !important;" width="200px;">
+                    </div>
+                    <div class="col-md-10 p-2">
+                        <div class="row">
+                            <div class="col-md-6" style="height: 50%">
+                                <center>
+                                    <h3 class="card-title"><b>Podiums</b></h3>
+                                    <h5>@driver.podiums</h5>
+                                </center>
+
+                            </div>
+                            <div class="col-md-6 p-2" style="height: 50%">
+                                <center>
+                                    <h3 class="card-title"><b>Career Points</b></h3>
+                                    <h5>@driver.career_points</h5>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6" style="height: 50%">
+                                <center>
+                                    <h3 class="card-title"><b>Podiums</b></h3>
+                                    <h5>@driver.podiums</h5>
+                                </center>
+
+                            </div>
+                            <div class="col-md-6 p-2" style="height: 50%">
+                                <center>
+                                    <h3 class="card-title"><b>Career Points</b></h3>
+                                    <h5>@driver.career_points</h5>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div id="DriverDetails" class="col align-content-center">
-                    <center>
-                        <h3>@driver.name</h3>
-                        <p>Nationality: @driver.nationality</p>
-                        <p>Birthdate: @driver.birthdate</p>
-                        <img src="@driver.image">
-                        <!-- Add other properties as needed -->
-                    </center>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@driver.name // @(mostRecentTeam?.team?.name ?? "N/A")</li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="container mt-5" style="border:solid 2px; border-radius: 25px;">
+            <div class="row">
+                <div class="col-md-4 p-2">
+                        <h3><b>@driver.name</b></h3>
+                        <h4>@(mostRecentTeam?.team?.name ?? "N/A")</h4>
+                        <img src="@driver.image" style="width: 50%;">
                 </div>
-                <div class="col">
+                <div class="col-md-8 p-2">
+                    <div class="row">
+                        <div class="col-md-6" style="height: 150px">
+                            <center>
+                                <h3 class="card-title"><b>Podiums</b></h3>
+                                <h5>@driver.podiums</h5>
+                            </center>
+
+                        </div>
+                        <div class="col-md-6 p-2" style="height: 150px">
+                            <center>
+                            <h3 class="card-title"><b>Career Points</b></h3>
+                            <h5>@driver.career_points</h5>
+                            </center>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <center>
+                            <h3 class="card-title"><b>World Championships</b></h3>
+                            <h5>@driver.world_championships</h5>
+                            </center>
+                        </div>
+                        <div class="col-md-6">
+                            <center>
+                            <h3 class="card-title"><b>Grand Prix Raced</b></h3>
+                            <h5>@driver.grands_prix_entered</h5>
+                            </center>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <br />
         <br />
     }
-
-
-
-
 }
 else if (error != null)
 {
@@ -55,7 +169,7 @@ else if (error != null)
 }
 
 @code {
-    private string searchParameter = "Lewis";
+    private string searchParameter;
     private DriverDetailRoot driver_data;
     private string searchResult;
     private string error;
@@ -87,6 +201,7 @@ else if (error != null)
                     Console.WriteLine(responseBody);
                     driver_data = JsonConvert.DeserializeObject<DriverDetailRoot>(responseBody);
                     StateHasChanged(); // Trigger a re-render of the component
+
                 }
             }
         }
