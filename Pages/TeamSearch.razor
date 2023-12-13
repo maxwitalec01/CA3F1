@@ -42,6 +42,7 @@ else if (team_data != null && team_data.response != null && team_data.response.A
 
     @foreach (var team in team_data.response)
     {
+        var modalId2 = $"exampleModal{team.id}"; // Assuming each driver has a unique 'id' property
 
         <br />
         <br />
@@ -77,9 +78,79 @@ else if (team_data != null && team_data.response != null && team_data.response.A
                     </div>
                 </div>
                 <!-- Footer with additional information -->
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">@team.name // Engine: @team.engine</li>
-                </ul>
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <h5>@team.name // Engine: @team.engine</h5>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#@modalId2">
+                            More Information
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="@modalId2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel2">More Driver Information</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">@team.name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Team Tyres</th>
+                                    <td>@team.tyres</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">President</th>
+                                    <td>@team.president</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">World Championships</th>
+                                    <td>@team.world_championships</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Chassis</th>
+                                    <td>@team.chassis</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Director</th>
+                                    <td>@team.director</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Engine</th>
+                                    <td>@team.engine</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Fastest Laps</th>
+                                    <td>@team.fastest_laps</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">World Championships</th>
+                                    <td>@team.pole_positions</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Technical Manager</th>
+                                    <td>@team.technical_manager</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -89,6 +160,23 @@ else if (error != null)
 {
     <p style="color: red;">Error: @error</p>
 }
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        jQuery.noConflict();
+        const myModal = jQuery('#exampleModal2');
+        if (myModal.length) {
+            myModal.on('shown.bs.modal', () => {
+                const myInput = jQuery('#myInput');
+                if (myInput.length) {
+                    myInput.focus();
+                }
+            });
+        }
+    });
+</script>
+
+
 
 @code {
 private string searchParameter;

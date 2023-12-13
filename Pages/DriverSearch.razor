@@ -10,9 +10,11 @@
         flex: 1 1 auto;
     }
 </style>
+<center>
+    <h3>F1 Driver Search</h3>
+    <br />
+</center>
 
-<h3>F1 Driver Search</h3>
-<br />
 
 <div class="container">
     <div class="row">
@@ -80,31 +82,71 @@ else if (driver_data != null && driver_data.response != null && driver_data.resp
                     </div>
                 </div>
                 <!-- Footer with additional information -->
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        @driver.name // @mostRecentTeam  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#@modalId">
-                            Launch demo modal
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        <h5>@driver.name // @(mostRecentTeam?.team?.name ?? "N/A")</h5>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#@modalId">
+                            More Information
                         </button>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
 
         <!-- Modal -->
         <div class="modal fade" id="@modalId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">More Driver Information</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <table class="table">
+                            <thead><tr>
+                                <th scope="col">Category</th>
+                                <th scope="col">@driver.name</th>
+                            </tr></thead>
+                            <tbody>
+                                                                <tr>
+                                    <th scope="row">Driver Number</th>
+                                    <td>@driver.number</td>
+                                </tr>
+                                                                <tr>
+                                    <th scope="row">Birthday</th>
+                                    <td>@driver.birthdate</td>
+                                </tr>
+                                                                <tr>
+                                    <th scope="row">Birth Place</th>
+                                    <td>@driver.birthplace</td>
+                                </tr>
+                                                                <tr>
+                                    <th scope="row">Career Points</th>
+                                    <td>@driver.career_points</td>
+                                </tr>
+                                                                <tr>
+                                    <th scope="row">Grand Prix Entered</th>
+                                    <td>@driver.grands_prix_entered</td>
+                                </tr>
+                                                                <tr>
+                                    <th scope="row">Highest Grid Finish</th>
+                                    <td>@driver.highest_grid_position</td>
+                                </tr>
+                                                                <tr>
+                                    <th scope="row">Nationality</th>
+                                    <td>@driver.nationality</td>
+                                </tr>
+                                                                <tr>
+                                    <th scope="row">World Championships</th>
+                                    <td>@driver.world_championships</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
