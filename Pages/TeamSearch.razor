@@ -1,0 +1,138 @@
+﻿@using CA3F1.Shared.Models﻿
+@using Newtonsoft.Json
+<!-- Pages/F1DriverSearch.razor -->
+@page "/TeamSearch"
+
+<style>
+    /* Additional styles to ensure the image and content are aligned properly */
+    .card-horizontal {
+        display: flex;
+        flex: 1 1 auto;
+    }
+</style>
+
+<h3>F1 Team Search</h3>
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-6 d-flex flex-column align-items-center justify-content-center">
+             <label for="driverSearch">Enter Team Name:</label>
+            <input type="text" class="form-control" id="driverSearch" placeholder="Mercedes"  @bind="searchParameter" required/>
+            <br />
+            <button @onclick="Search" class="btn btn-danger" type="submit">Search</button>
+        </div>
+        <div class="col-sm-3">
+        </div>
+    </div>
+</div>
+
+
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (team_data != null && team_data.response != null && team_data.response.Any())
+{
+    <br />
+    <br />
+
+    @foreach (var team in team_data.response)
+    {
+
+        <br />
+        <br />
+        <div class="container-fluid my-5">
+            <div class="card mb-3">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-4 p-2">
+                        <!-- Team Logo -->
+                        <img src="@team.logo" class="img-fluid rounded-start" alt="Team Logo">
+                    </div>
+                    <div class="col-md-8">
+                        <!-- Information Section -->
+                        <div class="row h-100 align-items-center">
+                            <div class="col-md-6 text-center">
+                                <h3 class="card-title"><b><u>World Championships</u></b></h3>
+                                <h5>@team.world_championships</h5>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <h3 class="card-title"><b><u>Director</u></b></h3>
+                                <h5>@team.director</h5>
+                            </div>
+                        </div>
+                        <div class="row h-100 align-items-center">
+                            <div class="col-md-6 text-center">
+                                <h3 class="card-title"><b><u>President</u></b></h3>
+                                <h5>@team.president</h5>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <h3 class="card-title"><b><u>Chassis</u></b></h3>
+                                <h5>@team.chassis</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer with additional information -->
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@team.name // Engine: @team.engine</li>
+                </ul>
+            </div>
+        </div>
+
+    }
+}
+else if (error != null)
+{
+    <p style="color: red;">Error: @error</p>
+}
+
+@code {
+private string searchParameter;
+private TeamDetailRoot team_data; // Assuming TeamDetailRoot is the appropriate data model for team details
+private string searchResult;
+private string error;
+private bool isLoading;
+
+private async Task Search()
+{
+    isLoading = true;
+
+    try
+    {
+        using (var client = new HttpClient())
+        {
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"https://api-formula-1.p.rapidapi.com/teams?search={searchParameter}"),
+                Headers =
+                {
+                    { "X-RapidAPI-Key", "5f3853b99amsh601f7aab225fb6ep1a2569jsndd2d15834371" },
+                    { "X-RapidAPI-Host", "api-formula-1.p.rapidapi.com" },
+                },
+            };
+
+            using (var response = await client.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var responseBody = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(responseBody);
+                team_data = JsonConvert.DeserializeObject<TeamDetailRoot>(responseBody); // Deserialize into team data model
+                StateHasChanged(); // Trigger a re-render of the component
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        error = ex.Message;
+    }
+    finally
+    {
+        isLoading = false;
+    }
+}
+}

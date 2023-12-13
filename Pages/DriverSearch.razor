@@ -19,10 +19,11 @@
         <div class="col-sm-3">
         </div>
         <div class="col-sm-6 d-flex flex-column align-items-center justify-content-center">
-            <label for="driverSearch">Enter Driver Name:</label>
-            <input type="text" class="form-control" id="driverSearch" placeholder="Lewis" @bind="searchParameter" />
+             <label for="driverSearch">Enter Driver Name:</label>
+            <input type="text" class="form-control" id="driverSearch" placeholder="Lewis"  @bind="searchParameter" required/>
             <br />
-            <button @onclick="Search" class="btn btn-danger">Search</button>
+            <button @onclick="Search" class="btn btn-danger" type="submit">Search</button>
+
         </div>
         <div class="col-sm-3">
         </div>
@@ -30,32 +31,6 @@
 </div>
 
 
-<div class="container my-5">
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="your-image-path.jpg" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Customizable Bootstrap Card</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">By Ivan Vinski</small></p>
-                </div>
-                <div class="card-footer bg-transparent border-top-0">
-                    <i class="fas fa-comment"> </i> <!-- Replace with actual icon -->
-                    <i class="fas fa-heart"> </i> <!-- Replace with actual icon -->
-                    <i class="fas fa-share-square"> </i> <!-- Replace with actual icon -->
-                </div>
-
-            </div>
-
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-        </ul>
-    </div>
-</div>
 
 @if (isLoading)
 {
@@ -69,104 +44,97 @@ else if (driver_data != null && driver_data.response != null && driver_data.resp
     @foreach (var driver in driver_data.response)
     {
         var mostRecentTeam = driver.teams.OrderByDescending(t => t.season).FirstOrDefault();
+        var modalId = $"exampleModal{driver.id}"; // Assuming each driver has a unique 'id' property
 
         <br />
         <br />
         <div class="container my-5">
-            <div class="card mb-3" style="width: 100%;">
-                <div class="row g-0">
-                    <div class="col-md-4" style="width: fit-content">
-                        <img src="@driver.image" class="img-fluid rounded-start" alt="..." height="200px !important;" width="200px;">
+            <div class="card mb-3">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-3">
+                        <!-- Driver Image -->
+                        <img src="@driver.image" class="img-fluid rounded-start" alt="Driver Image" style="max-width: 100%; border-right: solid 1px #dfdfdf;">
                     </div>
-                    <div class="col-md-10 p-2">
+                    <div class="col-md-8">
+                        <!-- Information Section -->
                         <div class="row">
-                            <div class="col-md-6" style="height: 50%">
-                                <center>
-                                    <h3 class="card-title"><b>Podiums</b></h3>
-                                    <h5>@driver.podiums</h5>
-                                </center>
-
+                            <div class="col-md-6 text-center">
+                                <h3 class="card-title"><b><u>Career Points</u></b></h3>
+                                <h5>@driver.career_points</h5>
                             </div>
-                            <div class="col-md-6 p-2" style="height: 50%">
-                                <center>
-                                    <h3 class="card-title"><b>Career Points</b></h3>
-                                    <h5>@driver.career_points</h5>
-                                </center>
+                            <div class="col-md-6 text-center">
+                                <h3 class="card-title"><b><u>Grand Prix Entered</u></b></h3>
+                                <h5>@driver.grands_prix_entered</h5>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6" style="height: 50%">
-                                <center>
-                                    <h3 class="card-title"><b>Podiums</b></h3>
-                                    <h5>@driver.podiums</h5>
-                                </center>
-
+                            <div class="col-md-6 text-center">
+                                <h3 class="card-title"><b><u>Podiums</u></b></h3>
+                                <h5>@driver.podiums</h5>
                             </div>
-                            <div class="col-md-6 p-2" style="height: 50%">
-                                <center>
-                                    <h3 class="card-title"><b>Career Points</b></h3>
-                                    <h5>@driver.career_points</h5>
-                                </center>
+                            <div class="col-md-6 text-center">
+                                <h3 class="card-title"><b><u>World Championships</u></b></h3>
+                                <h5>@driver.world_championships</h5>
                             </div>
                         </div>
                     </div>
-
                 </div>
+                <!-- Footer with additional information -->
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">@driver.name // @(mostRecentTeam?.team?.name ?? "N/A")</li>
+                    <li class="list-group-item">
+                        @driver.name // @mostRecentTeam  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#@modalId">
+                            Launch demo modal
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
 
 
-        <div class="container mt-5" style="border:solid 2px; border-radius: 25px;">
-            <div class="row">
-                <div class="col-md-4 p-2">
-                        <h3><b>@driver.name</b></h3>
-                        <h4>@(mostRecentTeam?.team?.name ?? "N/A")</h4>
-                        <img src="@driver.image" style="width: 50%;">
-                </div>
-                <div class="col-md-8 p-2">
-                    <div class="row">
-                        <div class="col-md-6" style="height: 150px">
-                            <center>
-                                <h3 class="card-title"><b>Podiums</b></h3>
-                                <h5>@driver.podiums</h5>
-                            </center>
-
-                        </div>
-                        <div class="col-md-6 p-2" style="height: 150px">
-                            <center>
-                            <h3 class="card-title"><b>Career Points</b></h3>
-                            <h5>@driver.career_points</h5>
-                            </center>
-                        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="@modalId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <center>
-                            <h3 class="card-title"><b>World Championships</b></h3>
-                            <h5>@driver.world_championships</h5>
-                            </center>
-                        </div>
-                        <div class="col-md-6">
-                            <center>
-                            <h3 class="card-title"><b>Grand Prix Raced</b></h3>
-                            <h5>@driver.grands_prix_entered</h5>
-                            </center>
-                        </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
         </div>
-        <br />
-        <br />
+
+
     }
 }
 else if (error != null)
 {
     <p style="color: red;">Error: @error</p>
 }
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        jQuery.noConflict();
+        const myModal = jQuery('#exampleModal');
+        if (myModal.length) {
+            myModal.on('shown.bs.modal', () => {
+                const myInput = jQuery('#myInput');
+                if (myInput.length) {
+                    myInput.focus();
+                }
+            });
+        }
+    });
+</script>
 
 @code {
     private string searchParameter;
