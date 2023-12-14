@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PbNR9LisIGSCYvSkeE5Fy6krwt+E7cMtQc2eaYFO+NAl645KzgFLbDONjl8W3wNuLdZZnz9ioORBVS0FmM3mlA==",
+  "dgSpecHash": "UruPQogDCeXATzYvfAIl1lQsl7866elFg/IGptyrGa0Q6w/MkJbBKt9dxs+OzHBQvwPc9wyCO4RHaMzuzCVgAg==",
   "success": true,
-  "projectFilePath": "C:\\CA3Blazor\\Ca3f1\\CA3F1Tests\\CA3F1Tests.csproj",
+  "projectFilePath": "C:\\CA3Blazor\\CA3F1\\CA3F1Tests\\CA3F1Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mwita\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\mwita\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

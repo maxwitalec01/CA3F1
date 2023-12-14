@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\CA3Blazor\\Ca3f1\\CA3F1Tests\\CA3F1Tests.csproj": {}
+    "C:\\CA3Blazor\\CA3F1\\CA3F1Tests\\CA3F1Tests.csproj": {}
   },
   "projects": {
-    "C:\\CA3Blazor\\Ca3f1\\CA3F1Tests\\CA3F1Tests.csproj": {
+    "C:\\CA3Blazor\\CA3F1\\CA3F1Tests\\CA3F1Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\CA3Blazor\\Ca3f1\\CA3F1Tests\\CA3F1Tests.csproj",
+        "projectUniqueName": "C:\\CA3Blazor\\CA3F1\\CA3F1Tests\\CA3F1Tests.csproj",
         "projectName": "CA3F1Tests",
-        "projectPath": "C:\\CA3Blazor\\Ca3f1\\CA3F1Tests\\CA3F1Tests.csproj",
+        "projectPath": "C:\\CA3Blazor\\CA3F1\\CA3F1Tests\\CA3F1Tests.csproj",
         "packagesPath": "C:\\Users\\mwita\\.nuget\\packages\\",
-        "outputPath": "C:\\CA3Blazor\\Ca3f1\\CA3F1Tests\\obj\\",
+        "outputPath": "C:\\CA3Blazor\\CA3F1\\CA3F1Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mwita\\AppData\\Roaming\\NuGet\\NuGet.Config",
