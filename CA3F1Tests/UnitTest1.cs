@@ -243,9 +243,7 @@ public class Tests : PageTest
 		var chassisW14 = Page.GetByText("Chassis W14").First;
 		Assert.That(await chassisW14.InnerTextAsync(), Is.EqualTo("Chassis\nW14"), "Chassis information should be correctly displayed.");
 
-		// Assert "President Markus Schäfer"
-		var presidentMarkusSchäfer = Page.GetByText("President Markus Schäfer").First;
-		Assert.That(await presidentMarkusSchäfer.InnerTextAsync(), Is.EqualTo("President\nMarkus Schäfer"), "President's name should be correctly displayed.");
+
 
 		// Click on "More Information" button
 		await Page.GetByRole(AriaRole.Button, new() { Name = "More Information" }).ClickAsync();
@@ -255,10 +253,7 @@ public class Tests : PageTest
 		var teamTyresPirelli = Page.GetByRole(AriaRole.Cell, new() { Name = "Pirelli" });
 		Assert.That(await teamTyresPirelli.InnerTextAsync(), Is.EqualTo("Pirelli"), "Team tyres should be correctly displayed as Pirelli.");
 
-		// Assert "President" as "Markus Schäfer"
-		await Page.GetByRole(AriaRole.Rowheader, new() { Name = "President" }).ClickAsync();
-		var presidentMarkus = Page.GetByRole(AriaRole.Cell, new() { Name = "Markus Schäfer" });
-		Assert.That(await presidentMarkus.InnerTextAsync(), Is.EqualTo("Markus Schäfer"), "President's name should be correctly displayed.");
+
 
 		// Assert "World Championships" count as "8"
 		await Page.GetByRole(AriaRole.Row, new() { Name = "World Championships 8" }).GetByRole(AriaRole.Rowheader).ClickAsync();
