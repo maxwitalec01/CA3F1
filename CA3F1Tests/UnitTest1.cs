@@ -133,7 +133,7 @@ public class Tests : PageTest
 		await eigth_points.ClickAsync();
 		Assert.That(await eigth_points.InnerTextAsync(), Is.EqualTo("25"), "Cell should show the expected text after click.");
 
-		// Test for clicking on cell with name "9"
+		// Test for clicking on cell with name "9".
 		var ninth_pos = Page.GetByRole(AriaRole.Cell, new() { Name = "9", Exact = true });
 		await ninth_pos.ClickAsync();
 		Assert.That(await ninth_pos.InnerTextAsync(), Is.EqualTo("9"), "Cell should show the expected text after click.");
