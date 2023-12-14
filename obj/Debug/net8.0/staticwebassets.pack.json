@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets\\index.html"
     },
     {
+      "Id": "C:\\CA3F1\\wwwroot\\sample-data\\F1.svg.png",
+      "PackagePath": "staticwebassets\\sample-data\\F1.svg.png"
+    },
+    {
       "Id": "C:\\CA3F1\\wwwroot\\sample-data\\weather.json",
       "PackagePath": "staticwebassets\\sample-data\\weather.json"
     },

@@ -11,8 +11,11 @@
     }
 </style>
 
-<h3>F1 Team Search</h3>
-<br />
+<center>
+    <h3>F1 Team Search</h3>
+    <br />
+
+</center>
 
 <div class="container">
     <div class="row">
@@ -42,7 +45,7 @@ else if (team_data != null && team_data.response != null && team_data.response.A
 
     @foreach (var team in team_data.response)
     {
-        var modalId2 = $"exampleModal{team.id}"; // Assuming each driver has a unique 'id' property
+        var modalId2 = $"exampleModal{team.id}"; 
 
         <br />
         <br />

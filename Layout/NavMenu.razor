@@ -1,47 +1,32 @@
-﻿<div class="top-row ps-1 navbar navbar-dark">
+﻿<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">CA3F1</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+        <img onclick="window.location.replace('/')" src="/sample-data/F1.svg.png" href="/"width="10%;"/>
+        <button class="navbar-toggler @NavButtonCssClass" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-label="Toggle navigation" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse @NavBarCssClass" id="navbarCollapse" @onclick="ToggleNavMenu">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+                <li style="padding-left: 3rem;">
+                    <NavLink class="nav-link d-flex align-items-center" href="DriverSearch">
+                        <box-icon name='car' type='solid' color='#939d9e'></box-icon>&nbsp; Driver Search
+                    </NavLink>
+                </li>
+                <li style="padding-left: 2rem;">
+                    <NavLink class="nav-link d-flex align-items-center" href="TeamSearch">
+                        <box-icon name='group' type='solid' color='#939d9e' style="display: inline-block;"></box-icon>&nbsp; Team Search
+                    </NavLink>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
-
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-2">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-2">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-2">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-        <div class="nav-item px-2">
-            <NavLink class="nav-link" href="DriverSearch">
-                <span class="oi oi-power-standby" aria-hidden="true"></span> Driver Search
-            </NavLink>
-        </div>
-        <div class="nav-item px-2">
-            <NavLink class="nav-link" href="TeamSearch">
-                <span class="oi oi-power-standby" aria-hidden="true"></span> Team Search
-            </NavLink>
-        </div>
-    </nav>
-</div>
-
+</nav>
 
 @code {
     private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private string? NavBarCssClass => collapseNavMenu ? null : "show";
+    private string? NavButtonCssClass => collapseNavMenu ? "collapsed" : null;
 
     private void ToggleNavMenu()
     {

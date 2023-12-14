@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4cLKwQZnlUCCVIBbVpet/qFQTcDl4nn9NLOgXIUrJEI=",
+  "Hash": "bLPtvrCBsNixaD1y81u7S62++EO6q/L7eVZ+MtnkJtU=",
   "Source": "CA3F1",
   "BasePath": "/",
   "Mode": "Root",
@@ -7976,6 +7976,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "C:\\CA3F1\\wwwroot\\sample-data\\F1.svg.png",
+      "SourceId": "CA3F1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\CA3F1\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "sample-data/F1.svg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\sample-data\\F1.svg.png"
     },
     {
       "Identity": "C:\\CA3F1\\wwwroot\\sample-data\\weather.json",

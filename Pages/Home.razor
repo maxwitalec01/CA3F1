@@ -3,25 +3,50 @@
 @page "/"
 
 <PageTitle>Index</PageTitle>
+<center>
+	<h1>Welcome to my Blazor F1 App!</h1>
+	<p>Developed for C# Module</p>
+	<br />
+	<br />
+</center>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-<p>API Response:</p>
-
-<script>
-	$(function () {
-		$('[data-toggle="popover"]').popover()
-	})
-</script>
 
 @if (TeamData?.response != null)
 {
-	@foreach (var TeamInfo in TeamData.response)
-	{
-		<p>Test: @TeamInfo.position</p>
-		<img src="@TeamInfo.team.logo">
-	}
+	<center>
+		<h5><b>2023 Season Team Rankings</b></h5>
+		<div >
+			<table class="table  w-auto table-responsive-sm">
+				<thead >
+					 
+					<tr>
+						<th scope="col">Position</th>
+						<th></th>
+						<th scope="col">Team</th>
+						<th scope="col">Points</th>
+					</tr>
+				</thead>
+				<tbody>
+
+				
+				@foreach (var TeamInfo in TeamData.response)
+				{
+					<tr>
+						<td class="text-center">@TeamInfo.position</td>
+						<td style="width: fit-content !important;"><img src="@TeamInfo.team.logo" width="125px !important;" height="75px !important;" class="float-end" /></td>
+						<td >@TeamInfo.team.name</td>
+						<td class="text-center">@TeamInfo.points</td>
+
+					</tr>
+
+				}
+				</tbody>
+			</table>
+		</div>
+	</center>
+
+
+	
 }
 else
 {
