@@ -6,7 +6,6 @@
 
 **Website:** [CA3F1 Web Application](https://maxwitalec01.github.io/CA3F1/)
 
-**Repository:** [Github Repository](https://github.com/maxwitalec01/CA3F1)
 
 ### Introduction
 
